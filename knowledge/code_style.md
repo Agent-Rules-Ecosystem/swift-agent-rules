@@ -17,7 +17,7 @@ Reglas de formateo, principios de seguridad y comprobación estática mediante *
    * El uso de `!` está estrictamente prohibido salvo en `@IBOutlet` inicializados por storyboard/nib o tests de integración aislados.
 2. **Protocolos e Inmunidad a Mutación**:
    * Preferir `struct` sobre `class` para garantizar la semántica de copia (Value Semantics) y seguridad entre hilos.
-   * Marcar tipos concurrentes con la anotación `@Sendable` o el protocolo `Sendable`.
+   * Conformar tipos concurrentes al protocolo `Sendable` (y usar `@Sendable` en closures/funciones concurrentes).
 3. **Macro `@Observable` (iOS 17+)**:
    * En ViewModels modernos, usar la macro `@Observable` en lugar de la clase legada `ObservableObject` con `@Published`.
 
@@ -38,10 +38,10 @@ Reglas de formateo, principios de seguridad y comprobación estática mediante *
 
 * Usar `async/await` en lugar de closures de completación (`(Result<T, Error>) -> Void`).
 * Marcar ViewModels y componentes de interfaz con la anotación `@MainActor` para garantizar que las actualizaciones de UI ocurran en el hilo principal.
-* Usar `Actor` para clases con estado mutable compartido entre múltiples hilos de ejecución.
+* Usar `actor` (tipo nominal de referencia aislado) para estado mutable compartido entre múltiples hilos de ejecución.
 
 ---
 
 ## 🛠️ 4. Formateo y Linters
 
-* Usar **SwiftLint** (`swiftlint`) para aplicar reglas de estilo automatizadas en Xcode.
+* Usar **SwiftLint** (`swiftlint`) y **swift-format** / **SwiftFormat** (`swift-format` / `swiftformat`) para reglas de estilo y formateo consistente.
